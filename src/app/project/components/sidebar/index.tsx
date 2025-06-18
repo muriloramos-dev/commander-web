@@ -2,15 +2,10 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import clsx from 'clsx';
-import Home from "../../../../public/home.png"
-import Dashboard from "../../../../public/dashboard.png"
-import Task from "../../../../public/task.png"
-import Change from "../../../../public/change.png"
 import Image from 'next/image';
-import { Divider } from '../divider';
-import { AnimatePresence, Variants, easeInOut, motion } from "motion/react";
-import { col } from 'motion/react-client';
 import { SideBarItem } from '../sidebaritem';
+import { AnimatePresence, easeInOut, motion, Variants } from 'motion/react';
+import Divider from '../divider';
 
 export default function Sidebar() {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
@@ -19,10 +14,11 @@ export default function Sidebar() {
   return (
     <motion.aside
       variants={sidebarVariants}
+      initial={false}
       animate={collapsed ? 'expanded' : 'collapsed'}
       onMouseOver={() => setCollapsed(true)}
       onMouseLeave={() => setCollapsed(false)}
-      className={clsx("text-black w-full border-r-gray-600 border-r-1")}
+      className={clsx("text-black border-r-gray-600 border-r-1")}
     >
 
       <div className="p-4 flex items-center justify-between md:hidden border-b">
@@ -33,6 +29,7 @@ export default function Sidebar() {
       <nav className={"hidden md:block py-4 pr-2"}>
         <ul className={clsx("gap-y-3 flex flex-col justify-start", collapsed ? "items-center" : "items-start")}>
           <motion.div
+          initial={{ width: '3rem' }}
             animate={{ width: !collapsed ? '3rem' : '15.5rem' }}
             transition={{ duration: 0.3, ease: [0.42, 0, 0.58, 1] }}
             className="border-b-2 border-b-gray-700 py-2 flex items-center px-4 justify-between rounded-lg bg-primary cursor-pointer"

@@ -1,4 +1,3 @@
-import Layout from "./components/layout";
 import "./globals.css";
 
 export default function RootLayout({
@@ -10,9 +9,7 @@ export default function RootLayout({
     <html lang="en" className="bg-background">
       <body className="h-screen flex flex-row justify-center items-center"
       >
-        <Layout>
-          {children}
-        </Layout>
+        {children}
       </body>
     </html>
   );
