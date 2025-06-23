@@ -17,7 +17,7 @@ export default function ProjectRedirectPage() {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         transition={{ type: "spring", stiffness: 300, damping: 20 }}
-        onClick={() => router.push("/project/create")}
+        onClick={() => router.push("/project/create", {scroll: true})}
       className="self-end py-2 px-4 bg-secondary rounded-md">Create Project</motion.button>
     </div>
   );

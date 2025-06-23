@@ -9,7 +9,7 @@ export default function RootLayout({
     <html lang="en" className="bg-background">
       <body className="h-screen flex flex-row justify-center items-center"
       >
-        {children}
+          {children}
       </body>
     </html>
   );

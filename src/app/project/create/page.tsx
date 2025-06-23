@@ -1,22 +1,28 @@
 "use client";
 import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function CreateProject() {
   const router = useRouter();
-  const [isVisible, setIsVisible] = useState(true);
-  const [selectedValue, setSelectedValue] = useState('');
+  const [isVisible, setIsVisible] = useState<boolean>(true);
+  const [selectedValue, setSelectedValue] = useState<string>('');
+  const [index, setIndex] = useState<number>(0);
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedValue(event.target.value);
   };
 
+    useEffect(() => {
+    router.prefetch("/project");
+  }, [router]);
+
   const handleClose = () => {
     setIsVisible(false);
     setTimeout(() => {
       router.push("/project");
-    }, 300);
+    }, 100);
   };
 
   return (
@@ -31,9 +37,19 @@ export default function CreateProject() {
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="bg-onBackground p-6 rounded shadow-lg max-w-lg w-full flex flex-col"
+            className="bg-onBackground p-6 rounded shadow-lg max-w-lg w-full flex flex-col gap-4"
           >
-            <h2 className="text-xl text-light font-semibold mb-4">Create Project</h2>
+            <div className="flex flex-row justify-between items-center">
+              <h2 className="text-xl text-light font-semibold">Create Project</h2>
+              <Image
+                alt="Close Icon"
+                src="/x.png"
+                width={24}
+                height={24}
+                onClick={handleClose}
+                className="cursor-pointer hover:opacity-80 transition-opacity duration-200"
+              />
+            </div>
             <form className="flex flex-col">
               <input
                 type="text"
@@ -59,12 +75,6 @@ export default function CreateProject() {
                 </div>
               </div>
             </form>
-            <button
-              onClick={handleClose}
-              className="mt-4 text-sm text-gray-600 underline self-end"
-            >
-              Cancel
-            </button>
 
 
           </div>
